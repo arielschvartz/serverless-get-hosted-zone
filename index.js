@@ -55,3 +55,5 @@ class ServerlessGetHostedZone {
     return hostedZoneId;
   }
 }
+
+module.exports = ServerlessGetHostedZone;
