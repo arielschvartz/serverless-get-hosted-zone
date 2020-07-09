@@ -41,15 +41,19 @@ class ServerlessGetHostedZone {
   async getHostedZoneId(src) {
     const DNSName = src.slice(13);
 
-    this.log('Getting hosted zone by name:', DNSName);
+    this.log(`Getting hosted zone by name: ${DNSName}`);
 
-    const {
-      HostedZones: [{
-        HostedZoneId: hostedZoneId,
-      } = {}]
-    } = this.route53.listHostedZonesByName({
+    const data = this.route53.listHostedZonesByName({
       DNSName,
     }).promise();
+
+    console.log(data);
+
+    {
+      HostedZones: [{
+        HostedZoneId: hostedZoneId,
+      } = {}] = []
+    } = data;
 
     if (hostedZoneId == null) {
       throw new Error('Hosted Zone with that name not found.')
