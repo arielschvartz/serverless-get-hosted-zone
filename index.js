@@ -44,7 +44,7 @@ class ServerlessGetHostedZone {
       HostedZones: [{
         HostedZoneId: hostedZoneId,
       } = {}]
-    } = await this.route53.listHostedZonesByName({
+    } = this.route53.listHostedZonesByName({
       DNSName,
     }).promise();
 
