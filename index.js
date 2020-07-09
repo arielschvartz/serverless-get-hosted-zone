@@ -28,7 +28,7 @@ class ServerlessGetHostedZone {
 
   get route53() {
     if (!this._route53) {
-      this._route53 = new this.serverless.providers.aws.sdk.route53({
+      this._route53 = new this.serverless.providers.aws.sdk.Route53({
         ...this.awsCredentials,
         apiVersion: '2013-04-01',
       });
