@@ -3,12 +3,13 @@ class ServerlessGetHostedZone {
     this.serverless = serverless;
     this.options = options || {};
 
+    // bindings
+    this.log = this.log.bind(this)
+    this.getHostedZoneId = this.getHostedZoneId.bind(this)
+
     this.variableResolvers = {
       hostedZoneId: this.getHostedZoneId,
     };
-
-    // bindings
-    this.log = this.log.bind(this)
   }
 
   log(msg) {
@@ -39,6 +40,8 @@ class ServerlessGetHostedZone {
 
   async getHostedZoneId(src) {
     const DNSName = src.slice(13);
+
+    this.log('Getting hosted zone by name:', DNSName);
 
     const {
       HostedZones: [{
